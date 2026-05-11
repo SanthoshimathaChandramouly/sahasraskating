@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { motion } from "framer-motion";
 import IceRink from "./three/IceRink";
 import Image from "next/image";
-import { HeroSkater } from "./three/FloatingCrystals";
 
 export default function Hero() {
   return (
@@ -19,10 +18,7 @@ export default function Hero() {
         </Canvas>
       </div>
 
-      {/* 3D Spinning Skater — right side overlay */}
-      <div style={{ position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', width: '280px', height: '280px', zIndex: 5 }}>
-        <HeroSkater />
-      </div>
+
 
       {/* Typography Overlay */}
       <div style={{ 

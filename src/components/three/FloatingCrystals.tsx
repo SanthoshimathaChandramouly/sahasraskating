@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { Float, Stars } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -34,6 +34,38 @@ function Crystal({ position, color, speed = 1, scale = 1 }: {
           thickness={1}
           emissive={color}
           emissiveIntensity={0.15}
+        />
+      </mesh>
+    </Float>
+  );
+}
+
+function FloatingImageSub({ url, position = [0, 0, 0], scale = [4, 5, 1] }: { url: string, position?: [number, number, number], scale?: [number, number, number] }) {
+  const texture = useLoader(THREE.TextureLoader, url);
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      const x = (state.mouse.x * Math.PI) / 20;
+      const y = (state.mouse.y * Math.PI) / 20;
+      meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, -y, 0.05);
+      meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, x, 0.05);
+    }
+  });
+
+  return (
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5} position={position}>
+      <mesh ref={meshRef} scale={scale}>
+        <planeGeometry args={[1, 1]} />
+        <meshPhysicalMaterial 
+          map={texture} 
+          transparent 
+          opacity={0.4} 
+          roughness={0.1}
+          metalness={0.2}
+          transmission={0.3}
+          thickness={0.5}
+          ior={1.5}
         />
       </mesh>
     </Float>
@@ -119,6 +151,10 @@ export function CoachesBackground() {
         <pointLight position={[10, 10, 10]} intensity={1} color="#87ceeb" />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#d100ff" />
         <Stars radius={80} depth={50} count={2000} factor={3} saturation={0} fade speed={0.5} />
+        
+        {/* Large 3D Floating Action Photo in background */}
+        <FloatingImageSub url="/photos/action1.JPG" position={[0, 0, -8]} scale={[12, 15, 1]} />
+        
         <Crystal position={[-6, 3, -3]} color="#87ceeb" speed={0.8} scale={0.4} />
         <Crystal position={[6, -2, -2]} color="#d100ff" speed={1.2} scale={0.6} />
         <Crystal position={[-4, -3, -4]} color="#ffd700" speed={0.6} scale={0.5} />
