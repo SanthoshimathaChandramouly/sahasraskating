@@ -114,7 +114,7 @@ export default function MediaGallery() {
               whileHover={{ y: -8, scale: 1.02 }}
               className="glass-panel"
               style={{
-                aspectRatio: i % 3 === 0 ? '4/5' : '1/1',
+                aspectRatio: '1/1',
                 position: 'relative',
                 overflow: 'hidden',
               }}

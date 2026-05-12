@@ -18,16 +18,28 @@ const timelineEvents = [
     description: "Developing fundamental skills, balance, and edge control while falling in love with the sport."
   },
   {
+    age: "Age 7",
+    year: "2021",
+    title: "Early Competition Success",
+    description: "Showcasing her talent on the competition stage and earning her first major medals."
+  },
+  {
     age: "Age 8",
     year: "2022",
+    title: "Competitive Excellence",
+    description: "Participating in competitions and performing routines with increasing artistic expression and technical difficulty."
+  },
+  {
+    age: "Age 9",
+    year: "2024",
     title: "Completed Axel",
     description: "A major milestone achieved! Mastered the single Axel jump, demonstrating exceptional athletic progression."
   },
   {
-    age: "Age 9",
-    year: "2023",
-    title: "Competitive Excellence",
-    description: "Participating in competitions and performing routines with increasing artistic expression and technical difficulty."
+    age: "Age 10",
+    year: "2025",
+    title: "Artistic Refinement",
+    description: "Mastering advanced edge work and rhythmic ice dance, she continues to push boundaries and set new benchmarks in her competitive journey."
   },
   {
     age: "Age 11",
@@ -143,7 +155,7 @@ export default function AboutTimeline() {
                     style={{
                       width: '100%',
                       maxWidth: '300px',
-                      aspectRatio: '4/3',
+                      aspectRatio: '1/1',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -155,13 +167,18 @@ export default function AboutTimeline() {
                       src={
                         index === 0 ? "/photos/5 year medals.jpg" :
                         index === 1 ? "/photos/6 years.JPG" :
-                        index === 2 ? "/photos/9 years.JPG" :
-                        index === 3 ? "/photos/action1.JPG" :
+                        index === 2 ? "/photos/5 years mdals.jpg" :
+                        index === 3 ? "/photos/action2.JPG" :
+                        index === 4 ? "/photos/medals5.jpg" :
+                        index === 5 ? "/photos/9 years3.JPG" :
                         "/photos/trophy.JPG"
                       } 
                       alt="Memory" 
                       fill 
-                      style={{ objectFit: 'cover', objectPosition: 'top' }} 
+                      style={{ 
+                        objectFit: 'cover', 
+                        objectPosition: [2, 3, 5].includes(index) ? 'center' : 'top' 
+                      }} 
                     />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(45deg, rgba(209, 0, 255, 0.2), transparent)', zIndex: 1 }} />
                   </motion.div>
